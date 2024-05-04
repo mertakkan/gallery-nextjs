@@ -1,19 +1,32 @@
 import { SignedIn, SignedOut } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
+import { getMyImages } from "~/server/queries";
 
 export const dynamic = "force-dynamic";
 
-const mockUrls = [
-  "https://utfs.io/f/98c114e4-6a67-4c0c-8508-3c2d77793d2a-y0h3m3.jpg",
-  "https://utfs.io/f/c6523202-73bc-415a-a396-d0d2917f404c-y0h3m4.jpg",
-  "https://utfs.io/f/e21ab72a-3ecc-4589-89d6-6840f8a234bc-y0h3m5.jpg",
-];
+async function Images() {
+  const images = await getMyImages();
 
-const mockImages = mockUrls.map((url, index) => ({
-  id: index + 1,
-  url,
-}));
+  return (
+    <div className="flex flex-wrap justify-center gap-4 p-4">
+      {images.map((image) => (
+        <div key={image.id} className="flex h-48 w-48 flex-col">
+          <Link href={`/img/${image.id}`}>
+            <Image
+              src={image.url}
+              style={{ objectFit: "contain" }}
+              width={192}
+              height={192}
+              alt={image.name}
+            />
+          </Link>
+          <div>{image.name}</div>
+        </div>
+      ))}
+    </div>
+  );
+}
 
 export default async function HomePage() {
   return (
@@ -24,13 +37,7 @@ export default async function HomePage() {
         </div>
       </SignedOut>
       <SignedIn>
-        <div className="flex flex-wrap justify-center gap-4 p-4">
-          {mockImages.map((image) => (
-            <div key={image.id} className="w-48">
-              <img src={image.url} />
-            </div>
-          ))}
-        </div>
+        <Images />
       </SignedIn>
     </main>
   );

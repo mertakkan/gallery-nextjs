@@ -2,7 +2,6 @@ import { ClerkProvider } from "@clerk/nextjs";
 
 import { fonts } from "~/utils/fonts";
 
-import { Inter } from "next/font/google";
 import { TopNav } from "~/components/topnav";
 import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 import { extractRouterConfig } from "uploadthing/server";
