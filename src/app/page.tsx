@@ -32,11 +32,15 @@ export default async function HomePage() {
   return (
     <main className="">
       <SignedOut>
-        <div className="h-full w-full text-center text-2xl">
+        <div className="h-full w-full p-10 text-center text-2xl">
           Please sign in above
         </div>
       </SignedOut>
       <SignedIn>
+        <div className="h-full w-full p-10 text-center text-2xl">
+          Permission is required to upload. Please contact{" "}
+          <span className="font-bold">mert@akkan.dev</span> for demo.
+        </div>
         <Images />
       </SignedIn>
     </main>
