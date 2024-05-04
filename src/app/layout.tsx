@@ -1,4 +1,6 @@
 import { ClerkProvider } from "@clerk/nextjs";
+import "~/styles/globals.css";
+import "@uploadthing/react/styles.css";
 
 import { fonts } from "~/utils/fonts";
 
@@ -34,7 +36,7 @@ export default function RootLayout({
              */
             routerConfig={extractRouterConfig(ourFileRouter)}
           />
-          <body className={`${fonts.inter} 'dark'`}>
+          <body className={`${fonts.inter}`}>
             <div className="grid h-screen grid-rows-[auto,1fr]">
               <TopNav />
               <main className="overflow-y-scroll">{children}</main>
