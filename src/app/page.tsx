@@ -1,3 +1,4 @@
+import { SignedIn, SignedOut } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -17,14 +18,20 @@ const mockImages = mockUrls.map((url, index) => ({
 export default async function HomePage() {
   return (
     <main className="">
-      <div className="h-full w-full text-center text-2xl">Gallery</div>
-      <div className="flex flex-wrap justify-center gap-4 p-4">
-        {mockImages.map((image) => (
-          <div key={image.id} className="w-48">
-            <img src={image.url} />
-          </div>
-        ))}
-      </div>
+      <SignedOut>
+        <div className="h-full w-full text-center text-2xl">
+          Please sign in above
+        </div>
+      </SignedOut>
+      <SignedIn>
+        <div className="flex flex-wrap justify-center gap-4 p-4">
+          {mockImages.map((image) => (
+            <div key={image.id} className="w-48">
+              <img src={image.url} />
+            </div>
+          ))}
+        </div>
+      </SignedIn>
     </main>
   );
 }

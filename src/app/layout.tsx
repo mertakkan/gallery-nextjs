@@ -1,5 +1,7 @@
 import "~/styles/globals.css";
 import { fonts } from "~/utils/fonts";
+import { ClerkProvider } from "@clerk/nextjs";
+import { TopNav } from "~/components/topnav";
 
 export const metadata = {
   title: "Next.js Gallery",
@@ -13,8 +15,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={`${fonts.inter}`}>{children}</body>
-    </html>
+    <ClerkProvider>
+      <html lang="en">
+        <body className={`${fonts.inter}`}>
+          <div className="grid h-screen grid-rows-[auto,1fr]">
+            <TopNav />
+            <main className="overflow-y-scroll">{children}</main>
+          </div>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
